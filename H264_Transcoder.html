@@ -26,6 +26,16 @@
   
   
 </head>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (location.pathname === "/contact") {
+      const section = document.getElementById("index.html#Contact");
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  });
+</script>
 <body>
   
   <section data-bs-version="5.1" class="menu menu2 cid-tJS6tZXiPa" once="menu" id="menu02-1i">
@@ -60,7 +70,7 @@
 						<a class="nav-link link text-black dropdown-toggle display-4" href="index#contacts02-9" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Guides</a><div class="dropdown-menu" aria-labelledby="dropdown-137"><a class="text-black dropdown-item text-primary display-4" href="https://www.youtube.com/@NeskorLabs" target="_blank">H.264 Transcoder</a></div>
 					</li><li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="About">About</a></li></ul>
 				
-				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-black display-4" href="/contact" onclick="event.preventDefault(); document.getElementById('index#Contact').scrollIntoView(); history.pushState(null, '', '/contact');">Contact</a></div>
+				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-black display-4" href="/contact" onclick="event.preventDefault(); document.getElementById('index.html#Contact').scrollIntoView(); history.pushState(null, '', '/contact');">Contact</a></div>
 			</div>
 		</div>
 	</nav>

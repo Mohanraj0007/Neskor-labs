@@ -252,33 +252,63 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="F9mNVKeAe3bmT+2DzMfK+KLFaRNwNAyBKxWmQyCNKoKH/o3fygI/aAIKrEz/97I0ZpPj+F3dV9nFi1/XBYJwiEe6Aj5UPM5wZhzgo2I3CRo1jjkJThuNuE1KGiafX6ZH">
-                    <div class="row">
-                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
-                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
-                            Oops...! some problem!
-                        </div>
-                    </div>
-                    <div class="dragArea row">
-                        <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                            <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-Contact">
-                        </div>
-                        <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                            <input type="email" name="email" placeholder="Email" data-form-field="email" class="form-control" value="" id="email-Contact">
-                        </div>
-                        <div class="col-12 form-group mb-3" data-for="phone">
-                            <input type="tel" name="phone" placeholder="Phone" data-form-field="phone" class="form-control" value="" id="phone-Contact">
-                        </div>
-                        <div class="col-12 form-group mb-3" data-for="textarea">
-                            <textarea name="textarea" placeholder="Message" data-form-field="textarea" class="form-control" id="textarea-Contact"></textarea>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-primary display-7">Send message</button></div>
-                    </div>
-                </form>
+		<form id="contact-form" class="mbr-form form-with-styler" data-form-title="Form Name">
+		    <div class="row">
+		        <div id="success-msg" style="display:none;" class="alert alert-success col-12">Thanks for filling out the form!</div>
+		        <div id="error-msg" style="display:none;" class="alert alert-danger col-12">Oops...! Something went wrong.</div>
+		    </div>
+		    <div class="dragArea row">
+		        <div class="col-md col-sm-12 form-group mb-3">
+		            <input type="text" name="name" placeholder="Name" class="form-control" id="name-Contact" required>
+		        </div>
+		        <div class="col-md col-sm-12 form-group mb-3">
+		            <input type="email" name="email" placeholder="Email" class="form-control" id="email-Contact" required>
+		        </div>
+		        <div class="col-12 form-group mb-3">
+		            <input type="tel" name="phone" placeholder="Phone" class="form-control" id="phone-Contact">
+		        </div>
+		        <div class="col-12 form-group mb-3">
+		            <textarea name="message" placeholder="Message" class="form-control" id="textarea-Contact" required></textarea>
+		        </div>
+		        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
+		            <button type="submit" class="btn btn-primary display-7">Send message</button>
+		        </div>
+		    </div>
+		</form>    
             </div>
         </div>
     </div>
 </section>
+<script>
+document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = new FormData();
+
+    // Google Form field names (entry.xxxxxxxx)
+    data.append("entry.1222495682", document.getElementById("name-Contact").value);
+    data.append("entry.1722888581", document.getElementById("email-Contact").value);
+    data.append("entry.2026325558", document.getElementById("phone-Contact").value);
+    data.append("entry.683440079", document.getElementById("textarea-Contact").value);
+
+    fetch("https://docs.google.com/forms/d/e/1FAIpQLSfD8vTggjL0wQVpxSRJCwwmJXzF0omDqZyTekaffgK1QbXtYw/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        body: data
+    }).then(() => {
+        // Clear form fields
+        form.reset();
+        // Show success
+        document.getElementById("success-msg").style.display = "block";
+        document.getElementById("error-msg").style.display = "none";
+    }).catch((error) => {
+        // Show error
+        document.getElementById("success-msg").style.display = "none";
+        document.getElementById("error-msg").style.display = "block";
+    });
+});
+</script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/home.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>  
 <div style="width: 100%; display: flex; justify-content: center; align-items: center;"> 
   <div style="width: 728px; height: 90px;">

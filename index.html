@@ -283,27 +283,25 @@
 document.getElementById("contact-form").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const form = e.target;
-    const data = new FormData();
+    const name = document.getElementById("name-Contact").value;
+    const email = document.getElementById("email-Contact").value;
+    const phone = document.getElementById("phone-Contact").value;
+    const message = document.getElementById("textarea-Contact").value;
 
-    // Google Form field names (entry.xxxxxxxx)
-    data.append("entry.1222495682", document.getElementById("name-Contact").value);
-    data.append("entry.1722888581", document.getElementById("email-Contact").value);
-    data.append("entry.2026325558", document.getElementById("phone-Contact").value);
-    data.append("entry.683440079", document.getElementById("textarea-Contact").value);
+    const data = new URLSearchParams();
+    data.append("name", name);
+    data.append("email", email);
+    data.append("phone", phone);
+    data.append("message", message);
 
-    fetch("https://docs.google.com/forms/d/e/1FAIpQLSfD8vTggjL0wQVpxSRJCwwmJXzF0omDqZyTekaffgK1QbXtYw/formResponse", {
+    fetch("https://script.google.com/macros/s/AKfycbyZK-2pbUSLAeX15wRXMtmJEB3mXpCrwHGfjGqVkIlrsB5lSg2t_OumIpSh9ROd_Dsf/exec", {
         method: "POST",
-        mode: "no-cors",
         body: data
     }).then(() => {
-        // Clear form fields
-        form.reset();
-        // Show success
+        document.getElementById("contact-form").reset();
         document.getElementById("success-msg").style.display = "block";
         document.getElementById("error-msg").style.display = "none";
     }).catch((error) => {
-        // Show error
         document.getElementById("success-msg").style.display = "none";
         document.getElementById("error-msg").style.display = "block";
     });
